@@ -1,0 +1,32 @@
+{
+  "name": "multistep-checkout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server-dev": "nodemon ./server",
+    "build": "babel client/src --watch -d public/lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruben-ruiz/Multistep-Checkout.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ruben-ruiz/Multistep-Checkout/issues"
+  },
+  "homepage": "https://github.com/ruben-ruiz/Multistep-Checkout#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.3",
+    "nodemon": "^2.0.7",
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-react": "^7.13.13"
+  }
+}
