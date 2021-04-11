@@ -1,3 +1,11 @@
+const Router = window.ReactRouterDOM.BrowserRouter;
+const Route =  window.ReactRouterDOM.Route;
+const Link =  window.ReactRouterDOM.Link;
+const Prompt =  window.ReactRouterDOM.Prompt;
+const Switch = window.ReactRouterDOM.Switch;
+const Redirect = window.ReactRouterDOM.Redirect;
+const ReactDOM = window.ReactDOM;
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -8,26 +16,51 @@ class App extends React.Component {
   }
 
   render() {
-    return <button onClick={this.handleClick}>Checkout</button>
+    return (
+    <Router>
+      <Switch>
+      <Route path="/checkout" component={Checkout}/>
+      <Route path="/" component={Home} />
+      </Switch>
+    </Router>
+    )
 
   }
 }
 
 class Checkout extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      currentForm: 1
+    }
   }
-
   render() {
-    return (
-      <form>
 
-      </form>
+    let renderForm;
+    if (this.state.currentForm === 1) {
+      renderForm = <UserAccount />
+    } else if (this.state.currentForm === 2) {
+      renderForm = <AddressInfo />
+    } else if (this.state.currentForm === 3) {
+      renderForm = <CreditCardInfo />
+    } else if (this.state.currentForm === 4) {
+      renderForm = <OrderConfirmation />
+    }
+
+    return (
+      <div>
+        {renderForm}
+      </div>
     )
   }
 }
 
-const UserAccount = () => {
+const Home = () => (
+  <button>Checkout</button>
+)
+
+const UserAccount = () => (
   <div>
     <label>First Name:</label>
     <input type="text"></input>
@@ -38,9 +71,9 @@ const UserAccount = () => {
     <label>Password:</label>
     <input type="password"></input>
   </div>
-}
+)
 
-const AddressInfo = () => {
+const AddressInfo = () => (
   <div>
     <label>Shipping Address</label>
     <label>line 1:</label>
@@ -54,9 +87,9 @@ const AddressInfo = () => {
     <label>Zip:</label>
     <input type="number"></input>
   </div>
-}
+)
 
-const CreditCardInfo = () => {
+const CreditCardInfo = () => (
   <div>
   <label>Credit Card #:</label>
   <input type="number"></input>
@@ -65,9 +98,9 @@ const CreditCardInfo = () => {
   <label>CVV:</label>
   <input type="number"></input>
 </div>
-}
+)
 
-const OrderConfirmation = () => {
+const OrderConfirmation = () => (
   <div>
     <label>First Name:</label>
     <p>{}</p>
@@ -95,7 +128,7 @@ const OrderConfirmation = () => {
     <p>{}</p>
     <button>Purchase</button>
   </div>
-}
+)
 
 const NextButton = () => (
   <button>Next</button>

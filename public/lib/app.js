@@ -22,6 +22,14 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+var Router = window.ReactRouterDOM.BrowserRouter;
+var Route = window.ReactRouterDOM.Route;
+var Link = window.ReactRouterDOM.Link;
+var Prompt = window.ReactRouterDOM.Prompt;
+var Switch = window.ReactRouterDOM.Switch;
+var Redirect = window.ReactRouterDOM.Redirect;
+var ReactDOM = window.ReactDOM;
+
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -39,9 +47,13 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("button", {
-        onClick: this.handleClick
-      }, "Checkout");
+      return /*#__PURE__*/React.createElement(Router, null, /*#__PURE__*/React.createElement(Switch, null, /*#__PURE__*/React.createElement(Route, {
+        path: "/checkout",
+        component: Checkout
+      }), /*#__PURE__*/React.createElement(Route, {
+        path: "/",
+        component: Home
+      })));
     }
   }]);
 
@@ -54,24 +66,45 @@ var Checkout = /*#__PURE__*/function (_React$Component2) {
   var _super2 = _createSuper(Checkout);
 
   function Checkout(props) {
+    var _this;
+
     _classCallCheck(this, Checkout);
 
-    return _super2.call(this, props);
+    _this = _super2.call(this, props);
+    _this.state = {
+      currentForm: 1
+    };
+    return _this;
   }
 
   _createClass(Checkout, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("form", null);
+      var renderForm;
+
+      if (this.state.currentForm === 1) {
+        renderForm = /*#__PURE__*/React.createElement(UserAccount, null);
+      } else if (this.state.currentForm === 2) {
+        renderForm = /*#__PURE__*/React.createElement(AddressInfo, null);
+      } else if (this.state.currentForm === 3) {
+        renderForm = /*#__PURE__*/React.createElement(CreditCardInfo, null);
+      } else if (this.state.currentForm === 4) {
+        renderForm = /*#__PURE__*/React.createElement(OrderConfirmation, null);
+      }
+
+      return /*#__PURE__*/React.createElement("div", null, renderForm);
     }
   }]);
 
   return Checkout;
 }(React.Component);
 
+var Home = function Home() {
+  return /*#__PURE__*/React.createElement("button", null, "Checkout");
+};
+
 var UserAccount = function UserAccount() {
-  /*#__PURE__*/
-  React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "First Name:"), /*#__PURE__*/React.createElement("input", {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "First Name:"), /*#__PURE__*/React.createElement("input", {
     type: "text"
   }), /*#__PURE__*/React.createElement("label", null, "Last Name:"), /*#__PURE__*/React.createElement("input", {
     type: "text"
@@ -83,8 +116,7 @@ var UserAccount = function UserAccount() {
 };
 
 var AddressInfo = function AddressInfo() {
-  /*#__PURE__*/
-  React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Shipping Address"), /*#__PURE__*/React.createElement("label", null, "line 1:"), /*#__PURE__*/React.createElement("input", {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Shipping Address"), /*#__PURE__*/React.createElement("label", null, "line 1:"), /*#__PURE__*/React.createElement("input", {
     type: "text"
   }), /*#__PURE__*/React.createElement("label", null, "line 2:"), /*#__PURE__*/React.createElement("input", {
     type: "text"
@@ -98,8 +130,7 @@ var AddressInfo = function AddressInfo() {
 };
 
 var CreditCardInfo = function CreditCardInfo() {
-  /*#__PURE__*/
-  React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Credit Card #:"), /*#__PURE__*/React.createElement("input", {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Credit Card #:"), /*#__PURE__*/React.createElement("input", {
     type: "number"
   }), /*#__PURE__*/React.createElement("label", null, "Exp Date:"), /*#__PURE__*/React.createElement("input", {
     type: "number"
@@ -109,8 +140,7 @@ var CreditCardInfo = function CreditCardInfo() {
 };
 
 var OrderConfirmation = function OrderConfirmation() {
-  /*#__PURE__*/
-  React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "First Name:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Last Name:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Email Address:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Shipping Address"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "line 1:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "line 2:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "City:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "State:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Zip:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Credit Card #:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Exp Date:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "CVV:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("button", null, "Purchase"));
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "First Name:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Last Name:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Email Address:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Shipping Address"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "line 1:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "line 2:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "City:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "State:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Zip:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Credit Card #:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Exp Date:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "CVV:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("button", null, "Purchase"));
 };
 
 var NextButton = function NextButton() {
