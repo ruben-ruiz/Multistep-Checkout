@@ -11,10 +11,6 @@ class App extends React.Component {
     super(props)
   }
 
-  handleClick () {
-
-  }
-
   render() {
     return (
     <Router>
@@ -34,24 +30,38 @@ class Checkout extends React.Component {
     this.state = {
       currentForm: 1
     }
+
+    this.handleClick = this.handleClick.bind(this);
   }
+
+  handleClick (e) {
+    e.preventDefault();
+    let btnClass = e.target.className;
+
+    btnClass === 'btn-next' ? this.setState(prevState => ({
+      currentForm: prevState.currentForm + 1
+    })) : this.setState(prevState => ({
+      currentForm: prevState.currentForm - 1
+    }))
+  }
+
   render() {
 
     let renderForm;
     if (this.state.currentForm === 1) {
-      renderForm = <UserAccount />
+      renderForm = <UserAccount handleClick={this.handleClick} />
     } else if (this.state.currentForm === 2) {
-      renderForm = <AddressInfo />
+      renderForm = <AddressInfo handleClick={this.handleClick} />
     } else if (this.state.currentForm === 3) {
-      renderForm = <CreditCardInfo />
+      renderForm = <CreditCardInfo handleClick={this.handleClick}/>
     } else if (this.state.currentForm === 4) {
       renderForm = <OrderConfirmation />
     }
 
     return (
-      <div>
+      <form>
         {renderForm}
-      </div>
+      </form>
     )
   }
 }
@@ -60,7 +70,7 @@ const Home = () => (
   <button>Checkout</button>
 )
 
-const UserAccount = () => (
+const UserAccount = ({handleClick}) => (
   <div>
     <label>First Name:</label>
     <input type="text"></input>
@@ -70,10 +80,11 @@ const UserAccount = () => (
     <input type="email"></input>
     <label>Password:</label>
     <input type="password"></input>
+    <NextButton handleClick={handleClick}/>
   </div>
 )
 
-const AddressInfo = () => (
+const AddressInfo = ({handleClick}) => (
   <div>
     <label>Shipping Address</label>
     <label>line 1:</label>
@@ -86,10 +97,12 @@ const AddressInfo = () => (
     <input type="text"></input>
     <label>Zip:</label>
     <input type="number"></input>
+    <BackButton handleClick={handleClick}/>
+    <NextButton handleClick={handleClick}/>
   </div>
 )
 
-const CreditCardInfo = () => (
+const CreditCardInfo = ({handleClick}) => (
   <div>
   <label>Credit Card #:</label>
   <input type="number"></input>
@@ -97,6 +110,8 @@ const CreditCardInfo = () => (
   <input type="number"></input>
   <label>CVV:</label>
   <input type="number"></input>
+  <BackButton handleClick={handleClick}/>
+  <NextButton handleClick={handleClick}/>
 </div>
 )
 
@@ -127,15 +142,16 @@ const OrderConfirmation = () => (
     <label>CVV:</label>
     <p>{}</p>
     <button>Purchase</button>
+    <BackButton handleClick={handleClick}/>
   </div>
 )
 
-const NextButton = () => (
-  <button>Next</button>
+const NextButton = ({handleClick}) => (
+  <button className="btn-next" onClick={handleClick}>Next</button>
 )
 
-const BackButton = () => (
-  <button>Back</button>
+const BackButton = ({handleClick}) => (
+  <button className="btn-back" onClick={handleClick}>Back</button>
 )
 
 ReactDOM.render(<App />, document.getElementById('app'));

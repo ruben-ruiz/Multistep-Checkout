@@ -42,9 +42,6 @@ var App = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(App, [{
-    key: "handleClick",
-    value: function handleClick() {}
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/React.createElement(Router, null, /*#__PURE__*/React.createElement(Switch, null, /*#__PURE__*/React.createElement(Route, {
@@ -74,25 +71,47 @@ var Checkout = /*#__PURE__*/function (_React$Component2) {
     _this.state = {
       currentForm: 1
     };
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Checkout, [{
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.preventDefault();
+      var btnClass = e.target.className;
+      btnClass === 'btn-next' ? this.setState(function (prevState) {
+        return {
+          currentForm: prevState.currentForm + 1
+        };
+      }) : this.setState(function (prevState) {
+        return {
+          currentForm: prevState.currentForm - 1
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var renderForm;
 
       if (this.state.currentForm === 1) {
-        renderForm = /*#__PURE__*/React.createElement(UserAccount, null);
+        renderForm = /*#__PURE__*/React.createElement(UserAccount, {
+          handleClick: this.handleClick
+        });
       } else if (this.state.currentForm === 2) {
-        renderForm = /*#__PURE__*/React.createElement(AddressInfo, null);
+        renderForm = /*#__PURE__*/React.createElement(AddressInfo, {
+          handleClick: this.handleClick
+        });
       } else if (this.state.currentForm === 3) {
-        renderForm = /*#__PURE__*/React.createElement(CreditCardInfo, null);
+        renderForm = /*#__PURE__*/React.createElement(CreditCardInfo, {
+          handleClick: this.handleClick
+        });
       } else if (this.state.currentForm === 4) {
         renderForm = /*#__PURE__*/React.createElement(OrderConfirmation, null);
       }
 
-      return /*#__PURE__*/React.createElement("div", null, renderForm);
+      return /*#__PURE__*/React.createElement("form", null, renderForm);
     }
   }]);
 
@@ -103,7 +122,8 @@ var Home = function Home() {
   return /*#__PURE__*/React.createElement("button", null, "Checkout");
 };
 
-var UserAccount = function UserAccount() {
+var UserAccount = function UserAccount(_ref) {
+  var handleClick = _ref.handleClick;
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "First Name:"), /*#__PURE__*/React.createElement("input", {
     type: "text"
   }), /*#__PURE__*/React.createElement("label", null, "Last Name:"), /*#__PURE__*/React.createElement("input", {
@@ -112,10 +132,13 @@ var UserAccount = function UserAccount() {
     type: "email"
   }), /*#__PURE__*/React.createElement("label", null, "Password:"), /*#__PURE__*/React.createElement("input", {
     type: "password"
+  }), /*#__PURE__*/React.createElement(NextButton, {
+    handleClick: handleClick
   }));
 };
 
-var AddressInfo = function AddressInfo() {
+var AddressInfo = function AddressInfo(_ref2) {
+  var handleClick = _ref2.handleClick;
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Shipping Address"), /*#__PURE__*/React.createElement("label", null, "line 1:"), /*#__PURE__*/React.createElement("input", {
     type: "text"
   }), /*#__PURE__*/React.createElement("label", null, "line 2:"), /*#__PURE__*/React.createElement("input", {
@@ -126,29 +149,48 @@ var AddressInfo = function AddressInfo() {
     type: "text"
   }), /*#__PURE__*/React.createElement("label", null, "Zip:"), /*#__PURE__*/React.createElement("input", {
     type: "number"
+  }), /*#__PURE__*/React.createElement(BackButton, {
+    handleClick: handleClick
+  }), /*#__PURE__*/React.createElement(NextButton, {
+    handleClick: handleClick
   }));
 };
 
-var CreditCardInfo = function CreditCardInfo() {
+var CreditCardInfo = function CreditCardInfo(_ref3) {
+  var handleClick = _ref3.handleClick;
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Credit Card #:"), /*#__PURE__*/React.createElement("input", {
     type: "number"
   }), /*#__PURE__*/React.createElement("label", null, "Exp Date:"), /*#__PURE__*/React.createElement("input", {
     type: "number"
   }), /*#__PURE__*/React.createElement("label", null, "CVV:"), /*#__PURE__*/React.createElement("input", {
     type: "number"
+  }), /*#__PURE__*/React.createElement(BackButton, {
+    handleClick: handleClick
+  }), /*#__PURE__*/React.createElement(NextButton, {
+    handleClick: handleClick
   }));
 };
 
 var OrderConfirmation = function OrderConfirmation() {
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "First Name:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Last Name:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Email Address:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Shipping Address"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "line 1:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "line 2:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "City:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "State:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Zip:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Credit Card #:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Exp Date:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "CVV:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("button", null, "Purchase"));
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "First Name:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Last Name:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Email Address:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Shipping Address"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "line 1:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "line 2:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "City:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "State:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Zip:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Credit Card #:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "Exp Date:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("label", null, "CVV:"), /*#__PURE__*/React.createElement("p", null), /*#__PURE__*/React.createElement("button", null, "Purchase"), /*#__PURE__*/React.createElement(BackButton, {
+    handleClick: handleClick
+  }));
 };
 
-var NextButton = function NextButton() {
-  return /*#__PURE__*/React.createElement("button", null, "Next");
+var NextButton = function NextButton(_ref4) {
+  var handleClick = _ref4.handleClick;
+  return /*#__PURE__*/React.createElement("button", {
+    className: "btn-next",
+    onClick: handleClick
+  }, "Next");
 };
 
-var BackButton = function BackButton() {
-  return /*#__PURE__*/React.createElement("button", null, "Back");
+var BackButton = function BackButton(_ref5) {
+  var handleClick = _ref5.handleClick;
+  return /*#__PURE__*/React.createElement("button", {
+    className: "btn-back",
+    onClick: handleClick
+  }, "Back");
 };
 
 ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById('app'));
